@@ -47,3 +47,4 @@ class GitHubItem(GitHub):
     def __repr__(self):
         return repr(self._d)
 
+MAIN = GitHub
