@@ -31,19 +31,26 @@
               <tr>
                 <td>Followers</td>
                 <td>
-                {% for follower in d["github"]["followers_json"][:10] %}
-                  {{ follower["login"] }}
-                  {{ "" if loop.last else "," }}
-                {% endfor %}
-                {% set follower_count = d["github"]["followers"] %}
-                {{ " and %s more." % (follower_count-10) if follower_count > 10 }}
+                  {% for follower in d["github"]["followers_json"][:10] %}
+                  <a href="{{ follower["html_url"] }}">{{ follower["login"] }}</a>
+                    {{ "" if loop.last else "," }}
+                  {% endfor %}
+                  {% set follower_count = d["github"]["followers"] %}
+                  {{ " and %s more." % (follower_count-10) if follower_count > 10 }}
                 </td>
+              </tr>
+              <tr>
+                <td>Repositories</td>
+                <td>
+                  {% for repo in d["github"]["repos_json"] %}
+                    <a href="{{ repo['html_url'] }}">{{ repo["name"] }}</a>
+                    ({{ repo["language"] }})
+                    {{ "" if loop.last else "," }}
+                  {% endfor %}
               </tr>
             </table>
           </div>
         </div>
-        <div class="col-md-4"></div>
-        <div class="col-md-4"></div>
       </div>
     </div>
   </body>
