@@ -5,7 +5,6 @@ import importlib
 
 import yaml
 
-import pyjade
 import jinja2
 
 def normpath(p):
@@ -20,6 +19,6 @@ for name, keys in config.items():
     ret[name] = m.MAIN(**keys)
 
 env = jinja2.Environment(loader=jinja2.FileSystemLoader(normpath("templates")),
-                         extensions=['pyjade.ext.jinja.PyJadeExtension']) 
-template = env.get_template("default.html.jade") 
+                         extensions=['jinja2.ext.do']) 
+template = env.get_template("default.html")
 print(template.render(d=ret)) 
