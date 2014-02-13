@@ -18,9 +18,12 @@ class GitHub(GitHubBase):
         if not self._d: 
             self.refresh()
         
-        if name not in self._d and name + "_url" in self._d:
-            ret = self._json(self._d[name + "_url"])
-            if ret: self._d[name] = ret
+        req = None
+        if name.endswith("_json"): req = self._d[name[:-5] + "_url"]
+        elif name == "json": req = self._d["url"]
+        if req: 
+            ret = self._json(req)
+            self._d[name] = ret
 
         return self._itemize(self._d[name])
     
