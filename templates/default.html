@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>My Online Presence</title>
+    <meta charset="utf-8"/>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.0/flatly/bootstrap.min.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="jumbotron">
+      <div class="container">
+        <h1>
+            {{ d["github"]["name"] }}
+            <span class="small">'s online presence</span>
+        </h1>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <i class="fa fa-github"></i> GitHub
+            </div>
+            <table class="table table-striped">
+              <tr>
+                <td>Username</td>
+                <td>{{ d["github"]["login"] }}</td>
+              </tr>
+              <tr>
+                <td>Followers</td>
+                <td>
+                {% for follower in d["github"]["followers_json"][:10] %}
+                  {{ follower["login"] }}
+                  {{ "" if loop.last else "," }}
+                {% endfor %}
+                {% set follower_count = d["github"]["followers"] %}
+                {{ " and %s more." % (follower_count-10) if follower_count > 10 }}
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+      </div>
+    </div>
+  </body>
+</html>
+
