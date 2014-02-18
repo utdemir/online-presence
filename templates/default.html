@@ -61,6 +61,28 @@
             </a>
           </div>
         </div>
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <i class="fa fa-stack-overflow"></i> Stack Overflow
+            </div>
+            <table class="table table-striped">
+              <tr>
+                <td>Reputation</td>
+                <td>{{ humanize.intcomma(d["stackoverflow"]["reputation"]) }}</td>
+              </tr>
+              {% for i in ["gold", "silver", "bronze"] %}
+                <tr>
+                  <td>{{ "Badges" if loop.first }}</td>
+                  <td>
+                      {{ d["stackoverflow"]["badge_counts"][i] }} 
+                      {{ i.capitalize() }}
+                  </td>
+                </tr>
+              {% endfor %}
+            </table>
+          </div> 
+        </div>
       </div>
     </div>
   </body>
