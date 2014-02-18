@@ -4,8 +4,8 @@ import os.path
 import importlib
 
 import yaml
-
 import jinja2
+import humanize
 
 def normpath(p):
     return os.path.join(os.path.dirname(__file__), p)
@@ -21,4 +21,4 @@ for name, keys in config.items():
 env = jinja2.Environment(loader=jinja2.FileSystemLoader(normpath("templates")),
                          extensions=['jinja2.ext.do']) 
 template = env.get_template("default.html")
-print(template.render(d=ret)) 
+print(template.render(d=ret, humanize=humanize)) 
